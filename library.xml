@@ -1,0 +1,93 @@
+<?xml version="1.0"  ?>
+<Library>
+<songs>
+	<song id="4">
+		<title>
+			Lucy In The Sky With Diamonds
+		</title>
+		<artist id="101">
+			Beatles
+		</artist>
+		<album id="202">
+			Sgt. Pepper's Lonely Hearts Club Band
+		</album> 
+	</song>
+	<song id="9">
+		<title>
+			OtherSide
+		</title>
+		<artist id="103">
+			RHC
+		</artist>
+		<album id="204">
+			Greatist Hits
+		</album> 
+	</song>
+	<song id="2">
+		<title>
+			Dear Prudence
+		</title>
+		<artist id="101">
+			Beatles
+		</artist>
+		<album id="201">
+			The White Album
+		</album> 
+	</song>
+	<song id="6">
+		<title>
+			Sugar Magnolia
+		</title>
+		<artist id="102">
+			Grateful Dead
+		</artist>
+		<album id="203">
+			American Beauty
+		</album> 
+	</song>
+	<song id="5">
+		<title>
+			Lovely Rita
+		</title>
+		<artist id="101">
+			Beatles
+		</artist>
+		<album id="202">
+			Sgt. Pepper's Lonely Hearts Club Band
+		</album> 
+	</song>
+	<song id="1">
+		<title>
+			Back in the USSR
+		</title>
+		<artist id="101">
+			Beatles
+		</artist>
+		<album id="201">
+			The White Album
+		</album> 
+	</song>
+	<song id="3">
+		<title>
+			Glass Onion
+		</title>
+		<artist id="101">
+			Beatles
+		</artist>
+		<album id="201">
+			The White Album
+		</album> 
+	</song>
+	<song id="7">
+		<title>
+			Californiacation
+		</title>
+		<artist id="103">
+			RHC
+		</artist>
+		<album id="204">
+			Greatist Hits
+		</album> 
+	</song>
+</songs>
+</Library>
