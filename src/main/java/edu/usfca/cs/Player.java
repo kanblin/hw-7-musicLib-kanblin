@@ -13,6 +13,7 @@ public class Player {
             Scanner scan = new Scanner(System.in);
             String pick;
 
+            System.out.println("-------------------");
             System.out.println("Music Library");
             System.out.println("Would you like to " +
                     "\n 1) display all music in library " +
@@ -28,6 +29,12 @@ public class Player {
 
                 case 1:
                     printSQL();
+                    break;
+
+                case 2:
+
+
+
 
 
 
@@ -53,19 +60,16 @@ public class Player {
 //            ResultSet as , al;
             int temp;
             while (rs.next()) {
-                // read the result set
-                System.out.println("id = " + rs.getInt("id"));
-                System.out.println("name = " + rs.getString("name"));
 
                 temp = rs.getInt("artist");
                 String currentArt = artFromSQL(temp);
-                System.out.println("artist = " + currentArt);
-
+//                System.out.println("artist = " + currentArt);
 
                 temp = rs.getInt("album");
                 String currentAlb = albFromSQL(temp);
-                System.out.println("album = " + currentAlb);
-
+//                System.out.println("album = " + currentAlb);
+                System.out.println("id:" + rs.getInt("id") + " " +  rs.getString("name")
+                        + " " + "artist : " + currentArt + " " + "album : " + currentAlb);
 
             }
         } catch (SQLException e) {

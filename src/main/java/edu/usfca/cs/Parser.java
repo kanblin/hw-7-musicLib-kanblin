@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -30,10 +31,12 @@ public class Parser {
         sb.append(child.getNodeValue());
         return sb.toString();
     }
+
     HashMap<Integer, Artist> artistMap = new HashMap<>();
     HashMap<Integer, Album> albumMap = new HashMap<>();
     HashMap< String, Integer> titleMap = new HashMap<>();
-//    Library lib = new Library();
+    Player player1 = new Player();
+
     public Library xmlParser() {
         Library lib = new Library();
 
@@ -169,10 +172,85 @@ public class Parser {
         return lib;
     }
 
-    public void toSQL(){
 
-    }
+    //fromSQl take data from sql and put them  into the maps
+    public void songsFromSQL(){
+        Library sqlSongLib = new Library();
 
+
+        Connection connection = null;
+
+        try {
+            // create a database connection
+            connection = DriverManager.getConnection("jdbc:sqlite:music.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+
+            ResultSet rs = statement.executeQuery("select * from songs");
+//            ResultSet as , al;
+            int temp, id;
+            String currentArt, currentAlb, currentSong;
+            while (rs.next()) {
+
+                id = rs.getInt("id");
+                currentSong = rs.getString("name");
+//                titleMap.containsKey(currentSong) ||
+//                titleMap does not have add new song
+                if (!titleMap.containsValue(id)) {
+                    Song songToAdd = new Song(currentSong);
+                    songToAdd.attributeID = id;
+                    titleMap.put(currentSong, id);
+
+                    temp = rs.getInt("artist");
+                    //if it contains this artist then pull it out no need to create a new one
+                    if (!artistMap.containsKey(temp)) {
+                        currentArt = player1.artFromSQL(temp);
+                        Artist artToAdd = new Artist(currentArt);
+                        artistMap.put(temp, artToAdd);
+                        songToAdd.setPerformer(artToAdd);
+                    } else {
+                        songToAdd.setPerformer(artistMap.get(temp));
+                    }
+
+                    temp = rs.getInt("album");
+                    //if it contains this artist then pull it out no need to create a new one
+                    if (!albumMap.containsKey(temp)) {
+                        currentAlb = player1.albFromSQL(temp);
+                        Album albToAdd = new Album(currentAlb);
+                        albumMap.put(temp, albToAdd);
+                        songToAdd.setAlbum(albToAdd);
+                    } else {
+                        songToAdd.setAlbum(albumMap.get(temp));
+                    }
+
+                    sqlSongLib.addSong(songToAdd);
+                } else {
+                    System.out.println("song already in library");
+                }
+
+
+            }
+        } catch (SQLException e) {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        for (int i = 0; i < sqlSongLib.getSongs().size(); i++) {
+            System.out.println(sqlSongLib.getSongs().get(i));
+
+        }
+
+        }
 
 
 }
