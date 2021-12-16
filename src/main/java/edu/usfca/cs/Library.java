@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+
 public class Library extends ArrayList{
     private ArrayList<Song> songs;
 //    protected ArrayList<Song> likedSongs;
@@ -130,7 +132,10 @@ Seems very inefficent to do it this way, is there something better ?
             e.printStackTrace();
         }
     }
-
+    /**
+     * randomLikes simply randomly assigns if songs in teh library are like or not.  This was used to simulate creating
+     * a like playlist.
+     */
     public void randomLikes() {
         Random random = new Random();
         boolean likeTF = false;
@@ -139,6 +144,10 @@ Seems very inefficent to do it this way, is there something better ?
             songs.get(i).setLike(likeTF);
         }
     }
+
+    /**
+     * filters the list to only the liked songs.  It prints to xml as well as the console.
+     */
 
     public void filterLikedList() {
         List<Song> list = songs.stream().filter(s -> s.isLike()).collect(Collectors.toList());
@@ -150,6 +159,12 @@ Seems very inefficent to do it this way, is there something better ?
             System.out.println(list.get(j));
         }
     }
+
+    /**
+     * very similar to filter liked artist.  filterByArt takes an artist and creates a list of songs by
+     * that artist and writes to both xml and console.
+     * @param artist
+     */
 
     public void filterByArt(String artist) {
         List<Song> list = songs.stream().filter(s -> s.performer.name.equals(artist)).collect(Collectors.toList());

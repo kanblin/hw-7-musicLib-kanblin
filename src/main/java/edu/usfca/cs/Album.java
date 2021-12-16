@@ -25,8 +25,6 @@ public class Album extends Entity {
         }
     }
 
-
-
     protected ArrayList<Song> getSongs() {
         return songs;
     }

@@ -2,6 +2,13 @@ package edu.usfca.cs;
 
 import java.util.Date;
 
+/**
+ * Entity Progressively track the number of "entities" in our library.  Attribute ID is what allows us to not increase
+ * the entity number when adding repetive information.  E.g. all songs on a given album in its nature have the same
+ * album name and artist for the most part.  The attribute ID allows the player to pull and fill in that value rather
+ * create another.
+ */
+
 public class Entity {
     protected String name;
     protected static int counter = 0;

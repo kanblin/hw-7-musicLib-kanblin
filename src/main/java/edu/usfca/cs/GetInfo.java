@@ -11,39 +11,35 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
 
-public class GetInfo {
 
+
+public class GetInfo {
+    /**
+     * GetGenre will take an input artist and return the genre.  The xml file had a number of votes for each
+     * genre specification the method will return the one with the highest count.
+     */
     public String getGenre(String a) {
         Scanner scan = new Scanner(System.in);
 
         String artist = a.replaceAll("\\s+","%20");
 
         String initialURL = "https://musicbrainz.org/ws/2/artist?query="+artist+"&fmt=xml";
-        /* MusicBrainz gives each element in their DB a unique ID, called an MBID. We'll use this to fecth that. */
-
-        /* now let's parse the XML.  */
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             URLConnection u = new URL(initialURL).openConnection();
             /* MusicBrainz asks to have a user agent string set. This way they can contact you if there's an
              * issue, and they won't block your IP. */
-            u.setRequestProperty("User-Agent", "Application ExampleParser/1.0 (cbrooks@usfca.edu");
+            u.setRequestProperty("User-Agent", "Application ExampleParser/1.0 (klin42@usfca.edu");
 
             Document doc = db.parse(u.getInputStream());
-            /* let's get the artist-list node */
             NodeList artists = doc.getElementsByTagName("tag");
-
-            /* let's assume that the one we want is first. */
             int votes = 0;
             String id = null;
             for (int i = 0; i < artists.getLength(); i++) {
                 Node genre = artists.item(i);
-
-
                 if (genre.getNodeType() == Node.ELEMENT_NODE) {
                     Element amount = (Element) genre;
-
                     if (votes <= Integer.parseInt(amount.getAttribute("count"))) {
                         votes = Integer.parseInt(amount.getAttribute("count"));
                         id = genre.getTextContent();
@@ -56,33 +52,28 @@ public class GetInfo {
             System.out.println("XML parsing error" + ex);
         }
         return "misc";
-
     }
 
 
-/*
-ask for a song and artist and will return the album
- */
+    /**
+     * songArtExample takes a song and artist will fetch album from music brainz.
+     * @param song
+     * @param artist
+     * @return
+     */
     public String songArtExample(String song, String artist) {
         Scanner scan = new Scanner(System.in);
-//        System.out.println("--------------");
-//        System.out.println("What is the name of the song?");
-//        song = scan.nextLine();
         song = song.replaceAll("\\s+","%20");
-//        System.out.println("Who is the artist?");
-//        artist = scan.nextLine();
         artist = artist.replaceAll("\\s+","%20");
         String initialURL = ("https://musicbrainz.org/ws/2/recording/?query=" + song +
                 "%20AND%20artist:" + artist +"&fmt=xml");
-//        String initialURL = "https://musicbrainz.org/ws/2/recording/?query=dashboard%20AND%20artist:modest%20mouse&fmt=xml";
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             URLConnection u = new URL(initialURL).openConnection();
             /* MusicBrainz asks to have a user agent string set. This way they can contact you if there's an
              * issue, and they won't block your IP. */
-            u.setRequestProperty("User-Agent", "Application ExampleParser/1.0 (cbrooks@usfca.edu");
-
+            u.setRequestProperty("User-Agent", "Application ExampleParser/1.0 klin42@usfca.edu");
             Document doc = db.parse(u.getInputStream());
             NodeList releases = doc.getElementsByTagName("release-group");
 
@@ -91,7 +82,6 @@ ask for a song and artist and will return the album
                 if (rGroup.getNodeType() == Node.ELEMENT_NODE) {
                     Element typeTag = (Element) rGroup;
                     String identifier = typeTag.getAttribute("type");
-//                    System.out.println(identifier);
                     if(identifier.equals("Album")){
                         NodeList titleId = rGroup.getChildNodes();
                         return titleId.item(0).getTextContent();
@@ -99,8 +89,6 @@ ask for a song and artist and will return the album
                     }
                 }
             }
-//            System.out.println(id + " " + votes);
-
         } catch (Exception ex) {
             System.out.println("XML parsing error" + ex);
         }
@@ -108,22 +96,18 @@ ask for a song and artist and will return the album
     }
 
 
-/*
-ask for an album and will return potential artists associated with the album
- */
+    /**
+     * albumGetArt will take a song name and find the top three artists associated to a recording of that name.
+     * The option to select none found is give otherwise.
+     * @param album
+     * @return
+     */
     public String  albumGetArt(String album) {
         Scanner scan = new Scanner(System.in);
         String  userIn;
-//        System.out.println("--------------");artist, song, album,
-//        System.out.println("What is the name of the album?");
-//        album = scan.nextLine();
         album = album.replaceAll("\\s+","%20");
 
         String initialURL = ("https://musicbrainz.org/ws/2/cdstub/?query=title:" + album + "&fmt=xml");
-//        String initialURL = "https://musicbrainz.org/ws/2/cdstub/?query=title:We%20Were%20Dead%20Before%20the%20Ship%20Even%20Sank&fmt=xml";
-        /* MusicBrainz gives each element in their DB a unique ID, called an MBID. We'll use this to fecth that. */
-//        https://musicbrainz.org/ws/2/cdstub/?query=title:Stadium%20arcadium%20AND%20artist:red%20Hot%20chili%20Peppers&fmt=xml
-        /* now let's parse the XML.  */
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -133,16 +117,10 @@ ask for an album and will return potential artists associated with the album
             u.setRequestProperty("User-Agent", "Application ExampleParser/1.0 (klin42@usfca.edu");
 
             Document doc = db.parse(u.getInputStream());
-            /* let's get the artist-list node */
-//            NodeList artists = doc.getElementsByTagName("recording");
             NodeList artist1 = doc.getElementsByTagName("artist");
-            /* let's assume that the one we want is first. */
-
             Node artist0T = artist1.item(0);
             Node artist1T = artist1.item(1);
             Node artist2T = artist1.item(2);
-//            System.out.println("name " + artist1T.getTextContent());
-
 
             System.out.println("Select one" +
                     "\n 0)"+ artist0T.getTextContent() +
@@ -164,14 +142,5 @@ ask for an album and will return potential artists associated with the album
         return null;
     }
 
-//testing area as all needed user inputs.
-//    public static void main(String[] args) {
-//        GetInfo test = new GetInfo();
-//        getGenre();
-//        String out = test.albumGetArt("Californication");
-//        System.out.println(out);
-//        String out =  test.songArtExample("We Are The Champions" , "Queen");
-//        System.out.println(out);
-//    }
 
 }

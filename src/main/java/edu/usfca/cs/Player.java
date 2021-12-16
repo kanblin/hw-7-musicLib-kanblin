@@ -3,12 +3,18 @@ package edu.usfca.cs;
 import java.sql.*;
 import java.util.Scanner;
 
+/**
+ * Player is the text based GUI
+ * The player will populate the library from the music.db file.  From there the user can add songs with limited
+ * information.  The player will use the GetInfo class and provide missing information.  It will update the SQL library
+ * as information is added.
+ */
+
 public class Player {
 
     public void player() {
         boolean on = true;
         Library lib = new Library();
-
         GetInfo tool = new GetInfo();
 
 
@@ -37,8 +43,6 @@ public class Player {
                     break;
 
                 case 3:
-
-
                     System.out.println("Would you like to " +
                             "\n 1) Add song by name & artist " +
                             "\n 2) Add song by name & album" +
@@ -96,6 +100,10 @@ public class Player {
 
     }
 
+    /**
+     * printSQL connects to the sql database and prints out the current SQL songs table.
+     * This allows the user to have an up to date library at all times.
+     */
     public void printSQL(){
         Connection connection = null;
 
@@ -104,20 +112,14 @@ public class Player {
             connection = DriverManager.getConnection("jdbc:sqlite:music.db");
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-
             ResultSet rs = statement.executeQuery("select * from songs");
-//            ResultSet as , al;
             int temp;
             while (rs.next()) {
 
                 temp = rs.getInt("artist");
                 String currentArt = artFromSQL(temp);
-//                System.out.println("artist = " + currentArt);
-
                 temp = rs.getInt("album");
                 String currentAlb = albFromSQL(temp);
-//                System.out.println("album = " + currentAlb);
                 System.out.println("id:" + rs.getInt("id") + " " +  rs.getString("name")
                         + " " + "artist : " + currentArt + " " + "album : " + currentAlb);
 

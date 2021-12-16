@@ -70,7 +70,6 @@ public class Song extends Entity {
     }
 
     public String toString() {
-//        return super.toString() + " " + this.performer + " " + this.album + " " + this.duration;
         return super.toString() + " " + this.performer + " " + this.album+ " " + this.like;
 
     }
