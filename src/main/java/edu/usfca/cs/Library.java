@@ -2,10 +2,8 @@ package edu.usfca.cs;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Library extends ArrayList{
     private ArrayList<Song> songs;
@@ -23,13 +21,6 @@ public class Library extends ArrayList{
         return false;
     }
 
-//    public ArrayList<Song> getLikedSongs() {
-//        return likedSongs;
-//    }
-//
-//    public void setLikedSongs(ArrayList<Song> likedSongs) {
-//        this.likedSongs = likedSongs;
-//    }
 
     public Library() {
         songs = new ArrayList<Song>();
@@ -140,11 +131,36 @@ Seems very inefficent to do it this way, is there something better ?
         }
     }
 
+    public void randomLikes() {
+        Random random = new Random();
+        boolean likeTF = false;
+        for (int i = 0; i < songs.size(); i++) {
+            likeTF = random.nextBoolean();
+            songs.get(i).setLike(likeTF);
+        }
+    }
 
+    public void filterLikedList() {
+        List<Song> list = songs.stream().filter(s -> s.isLike()).collect(Collectors.toList());
+        Library newPlaylist = new Library();
+        newPlaylist.getSongs().addAll(list);
+        newPlaylist.writeXML();
+        System.out.println("------------------");
+        for (int j = 0; j < list.size(); j++) {
+            System.out.println(list.get(j));
+        }
+    }
 
-
-
-
+    public void filterByArt(String artist) {
+        List<Song> list = songs.stream().filter(s -> s.performer.name.equals(artist)).collect(Collectors.toList());
+        Library newPlaylist = new Library();
+        newPlaylist.getSongs().addAll(list);
+        newPlaylist.writeXML();
+        System.out.println("------------------");
+        for (int j = 0; j < list.size(); j++) {
+            System.out.println(list.get(j));
+        }
+    }
 
 
 }

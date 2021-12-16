@@ -2,6 +2,7 @@ package edu.usfca.cs;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /*Task 4
 add a song to a playlist.
@@ -38,7 +39,7 @@ public class Playlist extends Library {
     }
 
     public ArrayList<Song> merge(Playlist otherPlaylist) {
-        Library library1 = new Library();
+//        Library library1 = new Library();
         this.listOfSongs.addAll(otherPlaylist.listOfSongs);
         Set<Song> hashSet = new HashSet<>(this.listOfSongs);
         this.listOfSongs = new ArrayList<>(hashSet);
@@ -52,14 +53,15 @@ public class Playlist extends Library {
     }
 
 
+
+
     public List<Song> shuffleList() {
         Collections.shuffle(listOfSongs);
         return listOfSongs;
     }
-/* Task 5 Now, let's add a function to generate a random playlist.
-* Additional feature is whether the song is liked or not
-* picks out liked songs and shuffles them.
+/*
 * */
+
     public List<Song> randomList(){
         List<Song> list = listOfSongs.stream().filter(s -> s.isLike()).collect(Collectors.toList());
         Collections.shuffle(list);

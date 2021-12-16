@@ -13,13 +13,10 @@ import java.util.Scanner;
 
 public class GetInfo {
 
-    public void getGenre() {
+    public String getGenre(String a) {
         Scanner scan = new Scanner(System.in);
-        String artist, song, album;
-        System.out.println("--------------");
-        System.out.println("Who is the artist?");
-        artist = scan.nextLine();
-        artist = artist.replaceAll("\\s+","%20");
+
+        String artist = a.replaceAll("\\s+","%20");
 
         String initialURL = "https://musicbrainz.org/ws/2/artist?query="+artist+"&fmt=xml";
         /* MusicBrainz gives each element in their DB a unique ID, called an MBID. We'll use this to fecth that. */
@@ -53,11 +50,13 @@ public class GetInfo {
                     }
                 }
             }
-            System.out.println(id + " " + votes);
+            return id;
 
         } catch (Exception ex) {
             System.out.println("XML parsing error" + ex);
         }
+        return "misc";
+
     }
 
 

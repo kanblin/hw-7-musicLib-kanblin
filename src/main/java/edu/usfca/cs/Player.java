@@ -7,10 +7,14 @@ public class Player {
 
     public void player() {
         boolean on = true;
+        Library lib = new Library();
+        Parser par = new Parser();
+        GetInfo tool = new GetInfo();
 
 
         while (on){
             Scanner scan = new Scanner(System.in);
+
             String pick;
 
             System.out.println("-------------------");
@@ -22,6 +26,7 @@ public class Player {
                     "\n 4) quit" );
             pick = scan.nextLine();
 
+            lib = par.songsFromSQL();
             switch(Integer.parseInt(pick)) {
                 case 4:
                     on = false;
@@ -32,10 +37,6 @@ public class Player {
                     break;
 
                 case 3:
-                    Library lib = new Library();
-                    Parser par = new Parser();
-                    lib = par.songsFromSQL();
-                    GetInfo tool = new GetInfo();
 
 
                     System.out.println("Would you like to " +
@@ -70,12 +71,26 @@ public class Player {
                     }
                     break;
                 case 2:
+//                    lib =  par.songsFromSQL();
+                    lib.randomLikes();
+                    System.out.println("Would you like to " +
+                            "\n 1) Playlist by Artist " +
+                            "\n 2) Liked Playlist" );
+                    pick = scan.nextLine();
+                    if(Integer.parseInt(pick) == 1){
+                        System.out.println("Who is the artist?");
+                        artist = scan.nextLine();
+                        lib.filterByArt(artist);
 
+                    } else if(Integer.parseInt(pick) == 2){
+                        lib.filterLikedList();
+                    }
+                    System.out.println("New playlist exported to xml file");
 
-
-
-
-
+                    break;
+                default:
+                    on = false;
+                    break;
             }
         }
 

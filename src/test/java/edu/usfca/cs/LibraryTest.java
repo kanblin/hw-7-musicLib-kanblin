@@ -3,6 +3,8 @@ package edu.usfca.cs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,7 +13,7 @@ class LibraryTest {
     Library myLibrary, likeTestLib;
     Song s1, s2, s3, s4, s5, s6, s7 , s8;
     Album a1, a2;
-    Artist b1;
+    Artist b1, b2;
     @BeforeEach
     void setUp() {
         myLibrary = new Library();
@@ -36,6 +38,7 @@ class LibraryTest {
         s7.setAlbum(a1);
         s8.setAlbum(a1);
         b1 = new Artist("Best Of");
+        b2 = new Artist("Joe");
         s1.setPerformer(b1);
         s2.setPerformer(b1);
         s3.setPerformer(b1);
@@ -72,11 +75,6 @@ class LibraryTest {
         System.out.println(myLibrary.getLiked(s4.isLike()));
         myLibrary.getLiked(s4.isLike());
 
-//        ArrayList<Song> liked = myLibrary.getLiked(); // playlist including californication and billie jean
-//        //prints out new playlist
-//        for (int j = 0; j < liked.size(); j++) {
-//            System.out.println(liked.get(j).name);
-//        }
 
     }
 
@@ -113,6 +111,32 @@ class LibraryTest {
         for (int i = 0; i < myLibrary.getSongs().size(); i++) {
             System.out.println(myLibrary.getSongs().get(i));
         }
+
+    }
+
+    @Test
+    void randomLikes() {
+        myLibrary.randomLikes();
+    }
+
+    @Test
+    void filterLikedList() {
+        myLibrary.randomLikes();
+
+        myLibrary.filterLikedList();
+
+    }
+
+    @Test
+    void filterByArt() {
+        s5.setPerformer(b2);
+        s6.setPerformer(b2);
+        myLibrary.addSong(s5);
+        myLibrary.addSong(s6);
+        myLibrary.randomLikes();
+
+        myLibrary.filterByArt("Best Of");
+//
 
     }
 }

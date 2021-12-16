@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class PlaylistTest {
     Playlist p1 , p2;
@@ -23,9 +24,9 @@ class PlaylistTest {
         s6 = new Song("Float On");
         s7 = new Song("Space Cowboy");
         s8 = new Song("billie Jean");
-        s3.setLike(true);
-        s4.setLike(true);
-        s5.setLike(true);
+//        s3.setLike(true);
+//        s4.setLike(true);
+//        s5.setLike(true);
         a1 = new Album("Here Comes the sun");
         s1.setAlbum(a1);
         s2.setAlbum(a1);
@@ -103,6 +104,8 @@ class PlaylistTest {
         for (int j = 0; j < p1.getListOfSongs().size(); j++) {
             System.out.println(p1.getListOfSongs().get(j));
         }
+
+
     }
 
     @Test
@@ -125,6 +128,7 @@ class PlaylistTest {
         myLibrary.writeJSON();
         myLibrary.writeXML();
     }
+
 
 }
 
