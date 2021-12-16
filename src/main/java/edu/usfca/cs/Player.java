@@ -22,7 +22,7 @@ public class Player {
                     "\n 4) quit" );
             pick = scan.nextLine();
 
-            switch(Integer.parseInt(pick)){
+            switch(Integer.parseInt(pick)) {
                 case 4:
                     on = false;
                     break;
@@ -31,10 +31,12 @@ public class Player {
                     printSQL();
                     break;
 
-                case 2:
+                case 3:
                     Library lib = new Library();
                     Parser par = new Parser();
                     lib = par.songsFromSQL();
+                    GetInfo tool = new GetInfo();
+
 
                     System.out.println("Would you like to " +
                             "\n 1) Add song by name & artist " +
@@ -42,8 +44,32 @@ public class Player {
                             "\n 3) Add song with all the info");
                     pick = scan.nextLine();
 
+                    String artist, song, album;
+                    System.out.println("--------------");
+                    System.out.println("What is the name of the song?");
+                    song = scan.nextLine();
 
+                    if(Integer.parseInt(pick) == 1){
+                        System.out.println("Who is the artist?");
+                        artist = scan.nextLine();
+                        album = tool.songArtExample(song, artist);
+                        par.SArtoSQL(song, artist, album);
 
+                    } else if(Integer.parseInt(pick) == 2){
+                        System.out.println("What is the name of the album?");
+                        album = scan.nextLine();
+                        artist = tool.albumGetArt(album);
+                        par.SArtoSQL(song, artist, album);
+
+                    } else if(Integer.parseInt(pick) == 3){
+                        System.out.println("Who is the artist?");
+                        artist = scan.nextLine();
+                        System.out.println("What is the name of the album?");
+                        album = scan.nextLine();
+                        par.SArtoSQL(song, artist, album);
+                    }
+                    break;
+                case 2:
 
 
 

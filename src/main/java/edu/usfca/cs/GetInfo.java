@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class GetInfo {
 
-    public static void getGenre() {
+    public void getGenre() {
         Scanner scan = new Scanner(System.in);
         String artist, song, album;
         System.out.println("--------------");
@@ -64,15 +64,14 @@ public class GetInfo {
 /*
 ask for a song and artist and will return the album
  */
-    public static void songArtExample() {
+    public String songArtExample(String song, String artist) {
         Scanner scan = new Scanner(System.in);
-        String artist, song, album;
-        System.out.println("--------------");
-        System.out.println("What is the name of the song?");
-        song = scan.nextLine();
+//        System.out.println("--------------");
+//        System.out.println("What is the name of the song?");
+//        song = scan.nextLine();
         song = song.replaceAll("\\s+","%20");
-        System.out.println("Who is the artist?");
-        artist = scan.nextLine();
+//        System.out.println("Who is the artist?");
+//        artist = scan.nextLine();
         artist = artist.replaceAll("\\s+","%20");
         String initialURL = ("https://musicbrainz.org/ws/2/recording/?query=" + song +
                 "%20AND%20artist:" + artist +"&fmt=xml");
@@ -96,9 +95,8 @@ ask for a song and artist and will return the album
 //                    System.out.println(identifier);
                     if(identifier.equals("Album")){
                         NodeList titleId = rGroup.getChildNodes();
-//                        titleId.item(0).getTextContent();
-                        System.out.println(titleId.item(0).getTextContent());
-                        break;
+                        return titleId.item(0).getTextContent();
+
                     }
                 }
             }
@@ -107,18 +105,19 @@ ask for a song and artist and will return the album
         } catch (Exception ex) {
             System.out.println("XML parsing error" + ex);
         }
+        return "Single";
     }
 
 
 /*
 ask for an album and will return potential artists associated with the album
  */
-    public static String  albumGetArt() {
+    public String  albumGetArt(String album) {
         Scanner scan = new Scanner(System.in);
-        String artist, song, album, userIn;
-        System.out.println("--------------");
-        System.out.println("What is the name of the album?");
-        album = scan.nextLine();
+        String  userIn;
+//        System.out.println("--------------");artist, song, album,
+//        System.out.println("What is the name of the album?");
+//        album = scan.nextLine();
         album = album.replaceAll("\\s+","%20");
 
         String initialURL = ("https://musicbrainz.org/ws/2/cdstub/?query=title:" + album + "&fmt=xml");
@@ -154,7 +153,7 @@ ask for an album and will return potential artists associated with the album
 
             userIn = scan.nextLine();
             if (userIn.equals("3")) {
-                return null;
+                return "none";
             } else {
                 return artist1.item(Integer.parseInt(userIn)).getTextContent();
             }
@@ -167,11 +166,13 @@ ask for an album and will return potential artists associated with the album
     }
 
 //testing area as all needed user inputs.
-    public static void main(String[] args) {
-        getGenre();
-//        String out = albumGetArt();
+//    public static void main(String[] args) {
+//        GetInfo test = new GetInfo();
+//        getGenre();
+//        String out = test.albumGetArt("Californication");
 //        System.out.println(out);
-//        songArtExample();
+//        String out =  test.songArtExample("We Are The Champions" , "Queen");
+//        System.out.println(out);
+//    }
 
-    }
 }

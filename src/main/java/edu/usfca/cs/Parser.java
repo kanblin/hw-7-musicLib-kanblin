@@ -254,7 +254,7 @@ public class Parser {
     }
 //edges duplicates?lowercase
 
-    public void SArtoSQL(String song, Artist artist, Album album){
+    public void SArtoSQL(String song, String artist, String album){
         Connection connection = null;
         PreparedStatement myStmt = null;
         ResultSet myRes = null;
@@ -272,34 +272,35 @@ public class Parser {
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
 
-            artID = artist.getArtistIDfromSQL();
-            albID = album.getAlbumIDfromSQL();
+            artID = getArtistIDfromSQL(artist);
+            albID = getAlbumIDfromSQL(album);
 //            System.out.println(artID);
-            //artID = 0 when it does not exsist need to make a new addition to sql library
-            if (artID == 0) {
-//                table artists (id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(50) NOT NULL, songs INTEGER);
-                artID = artistMap.size()+1;
-                String artistInsert = artID + ", '" + artist.name + "'";
-                statement.executeUpdate("insert into artists (id, name) values (" + artistInsert + ")");
-                artistMap.put(artID, artist);
 
-            }
-            if (albID == 0) {
-//              albums (id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(50) NOT NULL, artist INTERGER NOT NULL, nSongs INTEGER);
-                albID = albumMap.size()+1;
-                String albumInsert = albID + ", '" + album.name + "'," + artID ;
-                statement.executeUpdate("insert into albums (id, name, artist) values (" + albumInsert + ")");
-                albumMap.put(albID, album);
-
-            }
 
             if(!titleMap.containsKey(song)){
-                //            songs (id integer, name string, artist integer, album integer);
+                Song additionalSong = new Song(song);
+                //artID = 0 when it does not exsist need to make a new addition to sql library
+                if (artID == 0) {
+//                table artists (id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(50) NOT NULL, songs INTEGER);
+                    artID = artistMap.size()+1;
+                    String artistInsert = artID + ", '" + artist + "'";
+                    statement.executeUpdate("insert into artists (id, name) values (" + artistInsert + ")");
+                    Artist createArt = new Artist(artist);
+                    artistMap.put(artID, createArt);
+                    additionalSong.setPerformer(createArt);
+                }
+                if (albID == 0) {
+//              albums (id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(50) NOT NULL, artist INTERGER NOT NULL, nSongs INTEGER);
+                    albID = albumMap.size()+1;
+                    String albumInsert = albID + ", '" + album + "'," + artID ;
+                    statement.executeUpdate("insert into albums (id, name, artist) values (" + albumInsert + ")");
+                    Album createAl = new Album(album);
+                    albumMap.put(albID, createAl);
+                    additionalSong.setAlbum(createAl);
+                }
+//            songs (id integer, name string, artist integer, album integer);
                 statement.executeUpdate("insert into songs (id, name, artist, album) values (" + songID + ", '"
                         + song + "'," + artID +"," + albID +")");
-                Song additionalSong = new Song(song);
-                additionalSong.setPerformer(artist);
-                additionalSong.setAlbum(album);
                 titleMap.put(song, songID);
             }
 
@@ -322,78 +323,80 @@ public class Parser {
 
     }
 
+    public int getArtistIDfromSQL(String a){
+        Connection connection = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRes = null;
+        int result  = 0;
 
+        try {
+            // create a database connection
+            connection = DriverManager.getConnection("jdbc:sqlite:music.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+
+            myStmt = connection.prepareStatement("select * from artists where name=?");
+            myStmt.setString(1, a);
+
+            myRes = myStmt.executeQuery();
+            result = myRes.getInt("id");
+//            System.out.println("Artist id: " + result);
+
+        } catch (SQLException e) {
+            return 0;
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+//            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    public int getAlbumIDfromSQL(String a){
+        Connection connection = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRes = null;
+        int result  = 0;
+
+        try {
+            // create a database connection
+            connection = DriverManager.getConnection("jdbc:sqlite:music.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+
+            myStmt = connection.prepareStatement("select * from albums where name=?");
+            myStmt.setString(1, a);
+
+            myRes = myStmt.executeQuery();
+            result = myRes.getInt("id");
+            System.out.println("Album id: " + result);
+
+        } catch (SQLException e) {
+            return 0;
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+//            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return result;
+    }
 
 
 }
 
-//    //writes stuff from theEntity to the SQL
-//    public static void writeToSQL(String theURL, Entity theEntity){
-//        Connection connection = null;
-//        try{
-//            connection = DriverManager.getConnection(theURL);
-//            Statement statement = connection.createStatement();
-//            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-//
-//            String theString = null;
-//            //ONLY WORKS FOR SONGS RIGHT NOW, add others later
-//            if(theEntity instanceof Song){
-//                theString = "songs";
-//                ResultSet rsSongs = statement.executeQuery("select * from " + theString);
-//                //checking if the song is already in the db
-//                while(rsSongs.next()){
-//                    //if the song is already in the db, just exit that shit
-//                    if(rsSongs.getString("name").equals(theEntity.getName())
-//                            || rsSongs.getInt("id") == theEntity.getID()){
-//                        System.out.println("not adding '" + theEntity.name + "'cos its already in the db");
-//                        return;
-//                    }
-//                }
-//                //check if the artist is in the db
-//                ResultSet rsArtists = statement.executeQuery("select * from artists");
-//                while(rsArtists.next()){
-//                    //if the artist is in the db, get the id from artist and assign it
-//                    if(rsArtists.getString("name").equals(((Song) theEntity).getArtist().name)){
-//                        String selectString = "select id from artists where name = '" + ((Song) theEntity).getArtist().name + "'";
-//                        ResultSet theRS = statement.executeQuery(selectString);
-//                        int theArtistID = theRS.getInt("id");
-//                        ((Song) theEntity).getArtist().entityID = theArtistID;
-//                        System.out.println("assigned the artistID: " + theArtistID + " to " + theEntity.name);
-//                        break;
-//                    }
-//                }
-//                //check if the album is in the db
-//                ResultSet rsAlbums = statement.executeQuery("select * from albums");
-//                while(rsAlbums.next()){
-//                    //if the album is in the db, get the id from the album and assign it
-//                    //System.out.println("rsAlbums.getString('name'): " + rsAlbums.getString("name"));
-//                    //System.out.println("theEntity.getAlbum().name: " + ((Song) theEntity).getAlbum().name);
-//                    if(rsAlbums.getString("name").equals(((Song) theEntity).getAlbum().name)){
-//                        String selectString = "select id from albums where name = '" + ((Song) theEntity).getAlbum().name + "'";
-//                        ResultSet theRS = statement.executeQuery(selectString);
-//                        int theAlbumID = theRS.getInt("id");
-//                        ((Song) theEntity).getAlbum().entityID = theAlbumID;
-//                        System.out.println("assigned the albumID: " + theAlbumID +" to " + theEntity.name);
-//                        break;
-//                    }
-//                }
-//                String addToSQLStatement = theEntity.toSQL(); //runtime polymorphism
-//                statement.executeUpdate(addToSQLStatement);
-//                System.out.println("executing update with: " + addToSQLStatement);
-//            }
-//        }
-//        catch(SQLException e){
-//            System.err.println(e.getMessage());
-//            e.printStackTrace();
-//        }
-//        finally {
-//            try{
-//                if(connection != null){
-//                    connection.close();
-//                }
-//            }
-//            catch (SQLException e){
-//                System.err.println(e.getMessage());
-//            }
-//        }
-//    }
