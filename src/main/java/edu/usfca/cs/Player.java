@@ -8,13 +8,13 @@ public class Player {
     public void player() {
         boolean on = true;
         Library lib = new Library();
-        Parser par = new Parser();
+
         GetInfo tool = new GetInfo();
 
 
         while (on){
             Scanner scan = new Scanner(System.in);
-
+            Parser par = new Parser();
             String pick;
 
             System.out.println("-------------------");

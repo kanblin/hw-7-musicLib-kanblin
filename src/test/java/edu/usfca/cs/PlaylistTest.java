@@ -24,9 +24,9 @@ class PlaylistTest {
         s6 = new Song("Float On");
         s7 = new Song("Space Cowboy");
         s8 = new Song("billie Jean");
-//        s3.setLike(true);
-//        s4.setLike(true);
-//        s5.setLike(true);
+        s3.setLike(true);
+        s4.setLike(true);
+        s5.setLike(true);
         a1 = new Album("Here Comes the sun");
         s1.setAlbum(a1);
         s2.setAlbum(a1);
@@ -122,12 +122,7 @@ class PlaylistTest {
 
     }
 
-    @Test
-    void writer(){
-        myLibrary.getSongs().addAll(p1.getListOfSongs());
-        myLibrary.writeJSON();
-        myLibrary.writeXML();
-    }
+
 
 
 }

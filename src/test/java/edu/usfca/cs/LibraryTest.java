@@ -98,19 +98,19 @@ class LibraryTest {
 
     @Test
     void removePotentialDuplicates() {
-        myLibrary.addSong(s5);
-        myLibrary.addSong(s4);
-        myLibrary.addSong(s7);
-        myLibrary.addSong(s8);
-        for (int i = 0; i < myLibrary.getSongs().size(); i++) {
-            System.out.println(myLibrary.getSongs().get(i));
-        }
-        System.out.println(myLibrary.getSongs().size());
-        myLibrary.removePotentialDuplicates();
-        System.out.println(myLibrary.getSongs().size());
-        for (int i = 0; i < myLibrary.getSongs().size(); i++) {
-            System.out.println(myLibrary.getSongs().get(i));
-        }
+//        myLibrary.addSong(s5);
+//        myLibrary.addSong(s4);
+//        myLibrary.addSong(s7);
+//        myLibrary.addSong(s8);
+//        for (int i = 0; i < myLibrary.getSongs().size(); i++) {
+//            System.out.println(myLibrary.getSongs().get(i));
+//        }
+//        System.out.println(myLibrary.getSongs().size());
+//        myLibrary.removePotentialDuplicates();
+//        System.out.println(myLibrary.getSongs().size());
+//        for (int i = 0; i < myLibrary.getSongs().size(); i++) {
+//            System.out.println(myLibrary.getSongs().get(i));
+//        }
 
     }
 

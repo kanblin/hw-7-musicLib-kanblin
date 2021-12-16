@@ -1,5 +1,38 @@
 <?xml version="1.0"  ?>
 <Library>
 <songs>
+	<song id="null">
+		<title>
+			Happy Birthday
+		</title>
+		<artist id="null">
+			Best Of
+		</artist>
+		<album id="null">
+			Here Comes the sun
+		</album> 
+	</song>
+	<song id="null">
+		<title>
+			Californication
+		</title>
+		<artist id="null">
+			Best Of
+		</artist>
+		<album id="null">
+			Here Comes the sun
+		</album> 
+	</song>
+	<song id="null">
+		<title>
+			Billie Jean
+		</title>
+		<artist id="null">
+			Best Of
+		</artist>
+		<album id="null">
+			Here Comes the sun
+		</album> 
+	</song>
 </songs>
 </Library>
