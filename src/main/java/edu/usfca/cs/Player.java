@@ -32,6 +32,15 @@ public class Player {
                     break;
 
                 case 2:
+                    Library lib = new Library();
+                    Parser par = new Parser();
+                    lib = par.songsFromSQL();
+
+                    System.out.println("Would you like to " +
+                            "\n 1) Add song by name & artist " +
+                            "\n 2) Add song by name & album" +
+                            "\n 3) Add song with all the info");
+                    pick = scan.nextLine();
 
 
 

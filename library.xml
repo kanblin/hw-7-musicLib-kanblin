@@ -1,92 +1,70 @@
 <?xml version="1.0"  ?>
 <Library>
 <songs>
-	<song id="4">
+	<song id="null">
 		<title>
-			Lucy In The Sky With Diamonds
+			Happy Birthday
 		</title>
-		<artist id="101">
-			Beatles
+		<artist id="null">
+			Best Of
 		</artist>
-		<album id="202">
-			Sgt. Pepper's Lonely Hearts Club Band
+		<album id="null">
+			Here Comes the sun
 		</album> 
 	</song>
-	<song id="9">
+	<song id="null">
 		<title>
-			OtherSide
+			Helter Skelter
 		</title>
-		<artist id="103">
-			RHC
+		<artist id="null">
+			Best Of
 		</artist>
-		<album id="204">
-			Greatist Hits
+		<album id="null">
+			Here Comes the sun
 		</album> 
 	</song>
-	<song id="2">
+	<song id="null">
 		<title>
-			Dear Prudence
+			Californication
 		</title>
-		<artist id="101">
-			Beatles
+		<artist id="null">
+			Best Of
 		</artist>
-		<album id="201">
-			The White Album
+		<album id="null">
+			Here Comes the sun
 		</album> 
 	</song>
-	<song id="6">
+	<song id="null">
 		<title>
-			Sugar Magnolia
+			Billie Jean
 		</title>
-		<artist id="102">
-			Grateful Dead
+		<artist id="null">
+			Best Of
 		</artist>
-		<album id="203">
-			American Beauty
+		<album id="null">
+			Here Comes the sun
 		</album> 
 	</song>
-	<song id="5">
+	<song id="null">
 		<title>
-			Lovely Rita
+			I Want it That Way
 		</title>
-		<artist id="101">
-			Beatles
+		<artist id="null">
+			Best Of
 		</artist>
-		<album id="202">
-			Sgt. Pepper's Lonely Hearts Club Band
+		<album id="null">
+			Here Comes the sun
 		</album> 
 	</song>
-	<song id="1">
+	<song id="null">
 		<title>
-			Back in the USSR
+			Float On
 		</title>
-		<artist id="101">
-			Beatles
+		<artist id="null">
+			Best Of
 		</artist>
-		<album id="201">
-			The White Album
-		</album> 
-	</song>
-	<song id="3">
-		<title>
-			Glass Onion
-		</title>
-		<artist id="101">
-			Beatles
-		</artist>
-		<album id="201">
-			The White Album
-		</album> 
-	</song>
-	<song id="7">
-		<title>
-			Californiacation
-		</title>
-		<artist id="103">
-			RHC
-		</artist>
-		<album id="204">
-			Greatist Hits
+		<album id="null">
+			Here Comes the sun
 		</album> 
 	</song>
 </songs>

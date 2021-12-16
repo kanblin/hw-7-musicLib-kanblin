@@ -1,106 +1,80 @@
 {
 	"songs": [
 	{
-		"id": "4",
-		"title": "Lucy In The Sky With Diamonds", 
+		"id": "null",
+		"title": "Happy Birthday", 
 		"artist": {
-			"id": "101",
-			"name": "Beatles"
+			"id": "null",
+			"name": "Best Of"
 		}, 
 		"album": {
-			"id": "202", 
-			"name": "Sgt. Pepper's Lonely Hearts Club Band"
+			"id": "null", 
+			"name": "Here Comes the sun"
 		}
 	}
 ,
 	{
-		"id": "9",
-		"title": "OtherSide", 
+		"id": "null",
+		"title": "Helter Skelter", 
 		"artist": {
-			"id": "103",
-			"name": "RHC"
+			"id": "null",
+			"name": "Best Of"
 		}, 
 		"album": {
-			"id": "204", 
-			"name": "Greatist Hits"
+			"id": "null", 
+			"name": "Here Comes the sun"
 		}
 	}
 ,
 	{
-		"id": "2",
-		"title": "Dear Prudence", 
+		"id": "null",
+		"title": "Californication", 
 		"artist": {
-			"id": "101",
-			"name": "Beatles"
+			"id": "null",
+			"name": "Best Of"
 		}, 
 		"album": {
-			"id": "201", 
-			"name": "The White Album"
+			"id": "null", 
+			"name": "Here Comes the sun"
 		}
 	}
 ,
 	{
-		"id": "6",
-		"title": "Sugar Magnolia", 
+		"id": "null",
+		"title": "Billie Jean", 
 		"artist": {
-			"id": "102",
-			"name": "Grateful Dead"
+			"id": "null",
+			"name": "Best Of"
 		}, 
 		"album": {
-			"id": "203", 
-			"name": "American Beauty"
+			"id": "null", 
+			"name": "Here Comes the sun"
 		}
 	}
 ,
 	{
-		"id": "5",
-		"title": "Lovely Rita", 
+		"id": "null",
+		"title": "I Want it That Way", 
 		"artist": {
-			"id": "101",
-			"name": "Beatles"
+			"id": "null",
+			"name": "Best Of"
 		}, 
 		"album": {
-			"id": "202", 
-			"name": "Sgt. Pepper's Lonely Hearts Club Band"
+			"id": "null", 
+			"name": "Here Comes the sun"
 		}
 	}
 ,
 	{
-		"id": "1",
-		"title": "Back in the USSR", 
+		"id": "null",
+		"title": "Float On", 
 		"artist": {
-			"id": "101",
-			"name": "Beatles"
+			"id": "null",
+			"name": "Best Of"
 		}, 
 		"album": {
-			"id": "201", 
-			"name": "The White Album"
-		}
-	}
-,
-	{
-		"id": "3",
-		"title": "Glass Onion", 
-		"artist": {
-			"id": "101",
-			"name": "Beatles"
-		}, 
-		"album": {
-			"id": "201", 
-			"name": "The White Album"
-		}
-	}
-,
-	{
-		"id": "7",
-		"title": "Californiacation", 
-		"artist": {
-			"id": "103",
-			"name": "RHC"
-		}, 
-		"album": {
-			"id": "204", 
-			"name": "Greatist Hits"
+			"id": "null", 
+			"name": "Here Comes the sun"
 		}
 	}
 	]
