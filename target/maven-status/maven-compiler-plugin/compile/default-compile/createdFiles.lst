@@ -1,0 +1,10 @@
+edu\usfca\cs\Library.class
+edu\usfca\cs\Artist.class
+edu\usfca\cs\Playlist.class
+edu\usfca\cs\Album.class
+edu\usfca\cs\Entity.class
+edu\usfca\cs\Song.class
+edu\usfca\cs\GetInfo.class
+edu\usfca\cs\Parser.class
+edu\usfca\cs\Player.class
+edu\usfca\cs\Song$SongInterval.class
